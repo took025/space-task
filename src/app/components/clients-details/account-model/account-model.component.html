@@ -1,0 +1,118 @@
+<div class="model__buttton">
+    <p-button (onClick)="toggleForm()" *ngIf="!showForm" label="ანგარიშის მოდელის დამატება" />
+</div>
+<form class="user__form model__form" [formGroup]="clientForm" (ngSubmit)="onSubmit()" [ngClass]="{'show': showForm}">
+    <div class="form__side">
+        <h3>ანგარიშის მოდელი</h3>
+        <div class="form-container model">
+            <div class="form__group">
+                <label for="accountNumber">Account Number</label>
+                <input pInputText id="accountNumber" formControlName="accountNumber" />
+                <span class="form__error" [ngClass]="{'show': 
+            !clientForm?.controls.accountNumber.value && clientForm?.controls.accountNumber.touched}">
+                    სავალდებულო ველი
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': clientForm.controls.accountNumber?.errors?.accountNumberExists && clientForm?.controls.accountNumber.touched}">
+                    ამ ნომრით უკვე არსებობს ანგარიშის მოდელი , გთხოთ შეცვალოთ
+                </span>
+            </div>
+            <div class="form__group">
+                <label for="accountType">accountType</label>
+                <p-dropdown [options]="accountStatus" formControlName="accountType" optionLabel="name"
+                    placeholder="Select Account Type" />
+                <span class="form__error" [ngClass]="{'show': 
+            !clientForm?.controls.accountType.value && clientForm?.controls.accountType.dirty}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+            <div class="form__group">
+                <label for="accountStatus">accountStatus</label>
+                <p-dropdown [options]="accountTypes" formControlName="accountStatus" optionLabel="name"
+                    placeholder="Select a account Status" />
+                <!-- <div *ngIf="!clientForm?.controls.personalId.value && clientForm?.controls.personalId.touched">
+                Valid email is required.
+            </div> -->
+                <span class="form__error" [ngClass]="{'show': 
+            !clientForm?.controls.accountStatus.value && clientForm?.controls.accountStatus.dirty}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+            <div class="form__group">
+                <label for="currency">currency</label>
+                <!-- <input pInputText id="currency" formControlName="currency" /> -->
+                <p-multiSelect [options]="currencyTypes" formControlName="currency" optionLabel="name"
+                    placeholder="Select currency" />
+
+                <span class="form__error" [ngClass]="{'show': 
+            !clientForm?.controls.currency.value && clientForm?.controls.currency.dirty}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+
+        </div>
+    </div>
+    <div>
+
+        <div class="model__buttton">
+            <p-button type="submit" [disabled]="clientForm.invalid" label="ანგარიშის მოდელის დამატება" />
+            <!-- <p-button (onClick)="toggleForm()" label="ანგარიშის მოდელის დამატება" /> -->
+        </div>
+    </div>
+    <!-- Display uploaded image -->
+    <!-- <img *ngIf="uploadedImage" [src]="uploadedImage" alt="Uploaded Image"> -->
+
+</form>
+<p-toast />
+@if (userData.accountModel.length) {
+<!-- {{userData.accountModel.length}} -->
+@for(model of userData.accountModel; track model.id) {
+<span>
+    <div class="user-detail-container">
+        <div *ngIf="model.id" [id]="model.id">
+            <div *ngIf="userData.accountModel.length">
+                <span class="close__icon" (click)="closeModel(model.id)" title="ანგარიშის დახურვა">
+                    <!-- <i class="pi pi-times-circle"></i> -->
+                    <i class="pi pi-times"></i>
+                </span>
+            </div>
+        </div>
+        <strong>ანგარიშის მოდელი</strong>
+        <div class="user__block model" [id]="model.id">
+            <div class="row">
+                <h4 class="title">model id</h4>
+                <span class="text">{{model.id}}</span>
+            </div>
+            <div class="row">
+                <h4 class="title">model Number</h4>
+                <span class="text">{{model.clientNumber}}</span>
+            </div>
+            <div class="row">
+                <h4 class="title">account Number</h4>
+                <span class="text">{{model.accountNumber}}</span>
+            </div>
+            <div class="row">
+                <h4 class="title">Account Type</h4>
+                <span class="text">{{model.accountType.name}}</span>
+            </div>
+            <div class="row">
+                <h4 class="title">Account Status</h4>
+                <span class="text">{{model.accountStatus.name}}</span>
+            </div>
+            <div class="row">
+                <h4 class="title">Currency</h4>
+                <div style="display: flex;">
+                    <ng-container *ngFor="let item of model.currency ; let last = last">
+                        <span class="text">{{item.name }} <span *ngIf="!last">,</span>&nbsp;</span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</span>
+
+} @empty {
+<span>არგაქვთ ანგარიშის მოდელი</span>
+}
+}
+<p-toast />

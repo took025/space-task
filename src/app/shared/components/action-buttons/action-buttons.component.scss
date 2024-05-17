@@ -1,0 +1,25 @@
+.dropdown__container {
+    position: relative;
+    .dropdown__items {
+        background-color: white;
+        position: absolute;
+        right: 100px;
+        bottom: 0;
+        z-index: 111;
+        max-width: 0;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: 0.3s;
+        display: flex;
+        width: 280px;
+        justify-content: space-between;
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: initial;
+            transition: 0.3s;
+            max-width: 300px;
+        }
+    }
+}

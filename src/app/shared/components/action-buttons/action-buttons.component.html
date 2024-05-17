@@ -1,0 +1,9 @@
+<div class="dropdown__container">
+    <p-button label="action" [text]="true" severity="info" (onClick)="toggleDropdown()" />
+    <div class="dropdown__items" [ngClass]="{'active': dropDown}">
+        <p-button label="Details" [routerLink]="['/client-details/', userId]" />
+        <p-button label="Edit" [routerLink]="['/client-form']" [queryParams]="{mode: 'edit' , id : userId}"
+            severity="warning" />
+        <p-button label="Delete" severity="danger" (onClick)="deleteUser()" />
+    </div>
+</div>

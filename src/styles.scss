@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+body {
+    margin: 0;
+}
+@layer reset, primeng;
+
+@layer reset {
+    .p-ripple.p-element.p-button.p-component,
+    .p-dropdown.p-component.p-inputwrapper,
+    .p-multiselect.p-component.p-inputwrapper {
+        width: 100%;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    .p-avatar img {
+        object-fit: cover;
+    }
+    .p-datatable .p-datatable-thead > tr > th {
+        white-space: nowrap;
+    }
+}
+.model__buttton {
+    display: flex;
+    margin: 20px auto;
+    justify-content: center;
+}
+.form__error {
+    color: #b3261e;
+    font-size: 12px;
+    padding-left: 16px;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: 1s;
+    margin-top: 4px;
+    &.show {
+        visibility: visible;
+        opacity: 1;
+        max-height: 100px;
+        transition: 1s;
+    }
+}
+.form-container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, calc(30%));
+    grid-column-gap: 15px;
+    grid-row-gap: 25px;
+    &.model {
+        grid-template-columns: repeat(4, calc(25% - 12px));
+    }
+    .form__group {
+        display: flex;
+        flex-direction: column;
+        label {
+            margin-bottom: 5px;
+        }
+    }
+}

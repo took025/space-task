@@ -1,0 +1,188 @@
+<!-- user-form.component.html -->
+<form class="user__form" [formGroup]="userForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <!-- name: ["", Validators.required],
+        surname: ["", Validators.required],
+        gender: ["", Validators.required],
+        personalId: ["", Validators.required], -->
+    <div class="form__side">
+        <h3>პერსონალური ინფორმაცია</h3>
+        <div class="form-container">
+            <div class="form__group">
+                <label for="firstName">სახელ</label>
+                <input pInputText id="firstName" formControlName="name" />
+                <span class="form__error" [ngClass]="{'show': 
+                        !userForm?.controls.name.value && userForm?.controls.name.touched}">
+                    სავალდებულო ველი
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': userForm?.controls.name.errors?.invalidLength  && userForm?.controls.name.value}">
+                    სახელი უნდა შედგებოდეს მინიმუმ 2 და მაქსიმუმ 50 სსიმბოლოსგან.
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': userForm?.controls.name.errors?.invalidCharacters  && userForm?.controls.name.touched}">
+                    სახელი უნდა შეიცავდეს ლათინურ ან ქართულ ასოებს
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': userForm?.controls.name.errors?.mixedLanguages  && userForm?.controls.name.touched}">
+                    სახელი არუნდა შეიიცავდეს ერთდროულად ლათინურ და ქართულ სიმბოლოებს
+                </span>
+            </div>
+            <div class="form__group">
+                <label for="lastName">გვარი</label>
+                <input pInputText id="lastName" formControlName="surname" />
+                <span class="form__error" [ngClass]="{'show': 
+                        !userForm?.controls.surname.value && userForm?.controls.surname.touched}">
+                    სავალდებულო ველი
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': userForm?.controls.surname.errors?.invalidLength  && userForm?.controls.surname.value}">
+                    სახელი უნდა შედგებოდეს მინიმუმ 2 და მაქსიმუმ 50 სსიმბოლოსგან.
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': userForm?.controls.surname.errors?.invalidCharacters  && userForm?.controls.surname.touched}">
+                    სახელი უნდა შეიცავდეს ლათინურ ან ქართულ ასოებს
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': userForm?.controls.surname.errors?.mixedLanguages  && userForm?.controls.surname.touched}">
+                    სახელი არუნდა შეიიცავდეს ერთდროულად ლათინურ და ქართულ სიმბოლოებს
+                </span>
+            </div>
+            <div class="form__group">
+                <label for="personalId">პირადი ნომერი</label>
+                <input pInputText id="personalId" formControlName="personalId" />
+                <!-- <div *ngIf="!userForm?.controls.personalId.value && userForm?.controls.personalId.touched">
+                Valid email is required.
+            </div> -->
+                <span class="form__error" [ngClass]="{'show': 
+                    !userForm?.controls.personalId.value && userForm?.controls.personalId.touched}">
+                    სავალდებულო ველი
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': (userForm?.controls.personalId.errors?.minlength || userForm?.controls.personalId.errors?.maxlength )  && userForm?.controls.personalId.touched}">
+                    პირადი ნომერი უნდა შედგებოდეს 11 ციფრისგან
+                </span>
+            </div>
+
+        </div>
+        <div class="form-container">
+            <div class="form__group">
+                <label for="phoneNumber">ტელეფონის ნომერი</label>
+                <input pInputText id="phoneNumber" formControlName="phoneNumber" />
+                <span class="form__error" [ngClass]="{'show': 
+                    !userForm?.controls.phoneNumber.value && userForm?.controls.phoneNumber.touched}">
+                    სავალდებულო ველი
+                </span>
+                <span class="form__error"
+                    [ngClass]="{'show': 
+                    userForm.controls.phoneNumber?.errors?.invalidPhoneNumber && userForm.controls.phoneNumber.touched}">
+                    უნდა იწყებოდეს ციფრი 5-ით და შეიცავდეს 9 ციფრს
+                </span>
+            </div>
+
+            <div class="form__group">
+                <label>სქესი</label>
+                <div class="radio__container">
+                    <div class="flex align-items-center">
+                        <p-radioButton value="კაცი" formControlName="gender" inputId="ingredient1" />
+                        <label for="ingredient1" class="ml-2">
+                            კაცი
+                        </label>
+                    </div>
+
+                    <div class="flex align-items-center">
+                        <p-radioButton value="ქალი" formControlName="gender" inputId="ingredient2" />
+                        <label for="ingredient2" class="ml-2">
+                            ქალი
+                        </label>
+                    </div>
+                </div>
+                <span class="form__error" [ngClass]="{'show': 
+                        !userForm?.controls.gender.value && userForm?.controls.gendertouched}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+
+        </div>
+        <h3>იურიდიული მისამართი</h3>
+        <div class="form-container" formGroupName="LegalAddress">
+            <div class="form__group">
+                <label for="country">ქვეყანა</label>
+                <input pInputText id="country" formControlName="country" />
+                <span class="form__error" [ngClass]="{'show': 
+            !userForm?.get('LegalAddress.country').value && userForm?.get('LegalAddress.country').touched}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+            <div class="form__group">
+                <label for="city">ქალაქი</label>
+                <input pInputText id="city" formControlName="city" />
+                <span class="form__error" [ngClass]="{'show': 
+            !userForm?.get('LegalAddress.city').value && userForm?.get('LegalAddress.city').touched}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+            <div class="form__group">
+
+                <label for="address">მისამართი</label>
+                <input pInputText id="address" formControlName="address" />
+                <span class="form__error" [ngClass]="{'show': 
+            !userForm?.get('LegalAddress.address').value && userForm?.get('LegalAddress.address').touched}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+        </div>
+        <h3>ფაქტიური მისამართი</h3>
+        <div class="form-container" formGroupName="factualAdress">
+            <div class="form__group">
+
+                <label for="fcountry">ქვეყანა</label>
+                <input pInputText id="fcountry" formControlName="country" />
+                <span class="form__error" [ngClass]="{'show': 
+            !userForm?.get('factualAdress.country').value && userForm?.get('factualAdress.country').touched}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+            <div class="form__group">
+
+                <label for="fcity">ქალაქი</label>
+                <input pInputText id="fcity" formControlName="city" />
+                <span class="form__error" [ngClass]="{'show': 
+            !userForm?.get('factualAdress.city').value && userForm?.get('factualAdress.city').touched}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+
+            <div class="form__group">
+                <label for="faddress">მისამართი</label>
+                <input pInputText id="faddress" formControlName="address" />
+                <span class="form__error" [ngClass]="{'show': 
+            !userForm?.get('factualAdress.address').value && userForm?.get('factualAdress.address').touched}">
+                    სავალდებულო ველი
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="upload__image">
+        <div>
+
+            <img width="100" *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image">
+            <img width="100" *ngIf="!imageUrl"
+                src="https://www.pngitem.com/pimgs/m/22-224249_blank-person-hd-png-download.png" alt="Uploaded Image">
+            <label for="uploadImage">
+                <i class="pi pi-upload"></i>
+                <!-- <p-button label="uploade image" /> -->
+            </label>
+            <input id="uploadImage" type="file" (change)="onFileSelected($event)">
+        </div>
+        <div class="model__buttton">
+            <p-button class="btn" [disabled]="userForm.invalid || !imageUrl" label=" {{Editmode ? 'edit' : 'add' }}"
+                type="submit" />
+        </div>
+    </div>
+
+    <!-- Display uploaded image -->
+    <!-- <img *ngIf="uploadedImage" [src]="uploadedImage" alt="Uploaded Image"> -->
+
+</form>
+<p-toast />

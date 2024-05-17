@@ -1,0 +1,70 @@
+@if (clientData) {
+<section class="user__detail__section">
+    <div>
+        <p-fieldset>
+            <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2 px-2">
+                    <p-avatar image="{{clientData.image}}" shape="circle" />
+                    <span class="font-bold" style="margin-left: 10px;">{{clientData.name + ' ' +
+                        clientData.surname}}</span>
+                </div>
+            </ng-template>
+            <div class="user-detail-container">
+                <strong>personal info</strong>
+                <div class="user__block">
+                    <!-- <div class="row">
+                        <h4 class="title">clientId</h4>
+                        <span class="text">{{clientData.clientId}}</span>
+                    </div> -->
+                    <div class="row">
+                        <h4 class="title">personal id</h4>
+                        <span class="text">{{clientData.personalId}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">gender</h4>
+                        <span class="text">{{clientData.gender}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user-detail-container">
+                <strong>Legal Address</strong>
+                <div class="user__block">
+                    <div class="row">
+                        <h4 class="title">city</h4>
+                        <span class="text">{{clientData.LegalAddress.city}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">address</h4>
+                        <span class="text">{{clientData.LegalAddress.address}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">country</h4>
+                        <span class="text">{{clientData.LegalAddress.country}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user-detail-container">
+                <strong>Factual Adress</strong>
+                <div class="user__block">
+                    <div class="row">
+                        <h4 class="title">city</h4>
+                        <span class="text">{{clientData.factualAdress.city}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">address</h4>
+                        <span class="text">{{clientData.factualAdress.address}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">country</h4>
+                        <span class="text">{{clientData.factualAdress.country}}</span>
+                    </div>
+                </div>
+            </div>
+        </p-fieldset>
+        <app-account-model [userData]="clientData"></app-account-model>
+    </div>
+</section>
+} @else {
+empty data
+}
+<p-toast />
