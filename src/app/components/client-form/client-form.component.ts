@@ -92,16 +92,24 @@ export class ClientFormComponent {
   }
 
   getData() {
-    this.route.data.pipe(takeUntil(this.sub$)).subscribe(({ userDetail }) => {
-      this.clientData = userDetail;
-      this.imageUrl = userDetail.image;
-      setTimeout(() => {
+    this.route.data.pipe(takeUntil(this.sub$)).subscribe(
+      ({ userDetail }) => {
+        this.clientData = userDetail;
+        this.imageUrl = userDetail.image;
+        setTimeout(() => {
+          this.messageService.add({
+            severity: "success",
+            detail: "ინფომრმაცია წარმატებით ჩაიტვირთა",
+          });
+        }, 0);
+      },
+      (error) => {
         this.messageService.add({
-          severity: "success",
-          detail: "ინფომრმაცია წარმატებით ჩაიტვირთა",
+          severity: "error",
+          detail: `${error.error}`,
         });
-      }, 0);
-    });
+      }
+    );
   }
 
   onFileSelected(event: any) {
@@ -131,26 +139,42 @@ export class ClientFormComponent {
       this.mainService
         .updateUser(this.clientData.id, newdata)
         .pipe(takeUntil(this.sub$))
-        .subscribe(() => {
-          this.messageService.add({
-            severity: "success",
-            detail: "ინფორმაცია წარმატებით შეიცვალა",
-          });
-        });
+        .subscribe(
+          () => {
+            this.messageService.add({
+              severity: "success",
+              detail: "ინფორმაცია წარმატებით შეიცვალა",
+            });
+          },
+          (error) => {
+            this.messageService.add({
+              severity: "error",
+              detail: `${error.error}`,
+            });
+          }
+        );
     } else {
       this.userForm.controls.accountModel.setValue([]);
       const payload = this.userForm.getRawValue();
       this.mainService
         .postNewAccount(payload)
         .pipe(takeUntil(this.sub$))
-        .subscribe(() => {
-          this.messageService.add({
-            severity: "success",
-            detail: "მომხმარებელი წარმატებით დარეგისტრირდა",
-          });
-          this.userForm.reset();
-          this.imageUrl = null;
-        });
+        .subscribe(
+          () => {
+            this.messageService.add({
+              severity: "success",
+              detail: "მომხმარებელი წარმატებით დარეგისტრირდა",
+            });
+            this.userForm.reset();
+            this.imageUrl = null;
+          },
+          (error) => {
+            this.messageService.add({
+              severity: "error",
+              detail: `${error.error}`,
+            });
+          }
+        );
     }
   }
 

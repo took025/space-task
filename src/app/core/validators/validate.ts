@@ -38,9 +38,11 @@ export class CustomValidators {
   static accountNumberExists(accountModel: accountModel[]): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) {
-        return null; // No validation error if the control is empty
+        return null;
       }
-      const exists = accountModel.some((item) => item.id === control.value);
+      const exists = accountModel.some(
+        (item) => item.accountNumber === control.value
+      );
       return exists ? { accountNumberExists: true } : null;
     };
   }

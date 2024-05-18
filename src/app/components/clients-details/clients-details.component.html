@@ -1,4 +1,4 @@
-@if (clientData) {
+@if (clientData.id) {
 <section class="user__detail__section">
     <div>
         <p-fieldset>
@@ -10,53 +10,53 @@
                 </div>
             </ng-template>
             <div class="user-detail-container">
-                <strong>personal info</strong>
+                <strong>პერსონალური ინფორმაცია </strong>
                 <div class="user__block">
-                    <!-- <div class="row">
-                        <h4 class="title">clientId</h4>
-                        <span class="text">{{clientData.clientId}}</span>
-                    </div> -->
                     <div class="row">
-                        <h4 class="title">personal id</h4>
+                        <h4 class="title">პირადი ნომერი</h4>
                         <span class="text">{{clientData.personalId}}</span>
                     </div>
                     <div class="row">
-                        <h4 class="title">gender</h4>
+                        <h4 class="title">სქესი</h4>
                         <span class="text">{{clientData.gender}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">მობილური</h4>
+                        <span class="text">{{clientData.phoneNumber}}</span>
                     </div>
                 </div>
             </div>
             <div class="user-detail-container">
-                <strong>Legal Address</strong>
+                <strong>იურიდიული მისამართი </strong>
                 <div class="user__block">
                     <div class="row">
-                        <h4 class="title">city</h4>
+                        <h4 class="title">ქვეყანა</h4>
+                        <span class="text">{{clientData.LegalAddress.country}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">ქალაქი</h4>
                         <span class="text">{{clientData.LegalAddress.city}}</span>
                     </div>
                     <div class="row">
-                        <h4 class="title">address</h4>
+                        <h4 class="title">მისამართი</h4>
                         <span class="text">{{clientData.LegalAddress.address}}</span>
-                    </div>
-                    <div class="row">
-                        <h4 class="title">country</h4>
-                        <span class="text">{{clientData.LegalAddress.country}}</span>
                     </div>
                 </div>
             </div>
             <div class="user-detail-container">
-                <strong>Factual Adress</strong>
+                <strong>ფაქტიური მისამართი </strong>
                 <div class="user__block">
                     <div class="row">
-                        <h4 class="title">city</h4>
+                        <h4 class="title">ქვეყანა</h4>
+                        <span class="text">{{clientData.factualAdress.country}}</span>
+                    </div>
+                    <div class="row">
+                        <h4 class="title">ქალაქი</h4>
                         <span class="text">{{clientData.factualAdress.city}}</span>
                     </div>
                     <div class="row">
-                        <h4 class="title">address</h4>
+                        <h4 class="title">მისამართი</h4>
                         <span class="text">{{clientData.factualAdress.address}}</span>
-                    </div>
-                    <div class="row">
-                        <h4 class="title">country</h4>
-                        <span class="text">{{clientData.factualAdress.country}}</span>
                     </div>
                 </div>
             </div>

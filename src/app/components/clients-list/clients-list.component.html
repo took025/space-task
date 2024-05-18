@@ -46,8 +46,11 @@
         </tr>
     </ng-template>
 </p-table>
+@if (userList.items > 10) {
+
 <p-paginator #paginator (onPageChange)="pageChange($event)" [first]="first" [rows]="pagination.limit"
     [totalRecords]="userList?.items" [rowsPerPageOptions]="[10, 20, 30]" />
+}
 } @else {
 <span class="form__error show">
     <!-- {{errorText[0].summary}} -->

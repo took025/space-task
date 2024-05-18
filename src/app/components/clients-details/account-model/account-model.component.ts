@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -41,6 +41,7 @@ import { CustomValidators } from "../../../core/validators/validate";
   ],
   templateUrl: "./account-model.component.html",
   styleUrl: "../clients-details.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MessageService],
 })
 export class AccountModelComponent {
@@ -84,13 +85,21 @@ export class AccountModelComponent {
     this.mainservice
       .updateUser(this.userData.id, payload)
       .pipe(takeUntil(this.sub$))
-      .subscribe((res) => {
-        this.messageService.add({
-          severity: "success",
-          detail: "ინფომრმაცია წარმატებით დაემატა",
-        });
-        this.toggleForm();
-      });
+      .subscribe(
+        () => {
+          this.messageService.add({
+            severity: "success",
+            detail: "ანგარიშის მოდელი წარმატებით დაემატა",
+          });
+          this.toggleForm();
+        },
+        (error) => {
+          this.messageService.add({
+            severity: "error",
+            detail: `${error.error}`,
+          });
+        }
+      );
   }
 
   closeModel(id: string | number) {
@@ -102,12 +111,20 @@ export class AccountModelComponent {
     this.mainservice
       .updateUser(this.userData.id, this.userData)
       .pipe(takeUntil(this.sub$))
-      .subscribe((res) => {
-        this.messageService.add({
-          severity: "success",
-          detail: "ანგარიშის მოდელი წარმატებით დაიხურა",
-        });
-      });
+      .subscribe(
+        () => {
+          this.messageService.add({
+            severity: "success",
+            detail: "ანგარიშის მოდელი წარმატებით დაიხურა",
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: "error",
+            detail: `${error.error}`,
+          });
+        }
+      );
   }
 
   toggleForm() {

@@ -38,24 +38,40 @@ export class ClientsDetailsComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.data.pipe(takeUntil(this.sub$)).subscribe(({ userDetail }) => {
-      this.clientData = userDetail;
-      setTimeout(() => {
+    this.route.data.pipe(takeUntil(this.sub$)).subscribe(
+      ({ userDetail }) => {
+        this.clientData = userDetail;
+        setTimeout(() => {
+          this.messageService.add({
+            severity: "success",
+            detail: "ინფომრმაცია წარმატებით ჩაიტვირთა",
+          });
+        }, 0);
+      },
+      (error) => {
         this.messageService.add({
-          severity: "success",
-          detail: "ინფომრმაცია წარმატებით ჩაიტვირთა",
+          severity: "error",
+          detail: `${error.error}`,
         });
-      }, 0);
-    });
+      }
+    );
   }
 
   getData(id: number | string) {
     this.mainService
       .getUserDetail(id)
       .pipe(takeUntil(this.sub$))
-      .subscribe((res: userInterface) => {
-        this.clientData = res;
-      });
+      .subscribe(
+        (res: userInterface) => {
+          this.clientData = res;
+        },
+        (error) => {
+          this.messageService.add({
+            severity: "error",
+            detail: `${error.error}`,
+          });
+        }
+      );
   }
 
   ngOnDestroy(): void {

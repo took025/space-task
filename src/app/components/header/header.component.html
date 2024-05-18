@@ -1,0 +1,10 @@
+<header class="header">
+    <nav class="header__navigation">
+        <a [routerLink]="['/']">
+            <img class="logo" src="https://cdn.dribbble.com/users/4990292/screenshots/10936644/space_4x.png" alt="">
+        </a>
+        <button *ngIf="showButton" [routerLink]="['/client-form']" [queryParams]="{mode: 'create'}" pButton pRipple
+            label="შექმენით ანგარიში" class="p-button-success">
+        </button>
+    </nav>
+</header>

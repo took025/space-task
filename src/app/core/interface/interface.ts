@@ -20,8 +20,8 @@ export interface userInterface {
 }
 
 export interface accountModel {
-  clientNumber: any;
   id?: string;
+  clientNumber: any;
   cliendNumber: string;
   accountType: {
     name: string;

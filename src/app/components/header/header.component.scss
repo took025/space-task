@@ -1,0 +1,20 @@
+.header {
+    height: 80px;
+    background-color: #7d84d1;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    .logo {
+        width: 65px;
+        border-radius: 50%;
+        height: 60px;
+    }
+    .header__navigation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

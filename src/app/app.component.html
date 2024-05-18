@@ -1,11 +1,4 @@
-<header class="header">
-  <nav>
-    <a [routerLink]="['/']">
-      <img class="logo" src="https://cdn.dribbble.com/users/4990292/screenshots/10936644/space_4x.png" alt="">
-    </a>
-    <button [routerLink]="['/client-form']" [queryParams]="{mode: 'create'}">create</button>
-  </nav>
-</header>
+<app-header></app-header>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
