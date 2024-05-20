@@ -35,7 +35,12 @@ export class UserEffects {
             }
           }),
           catchError((error) => {
-            return of(UserActions.loginFailure({ error: "API call failed" }));
+            return of(
+              UserActions.loginFailure({
+                error:
+                  "დაფიქსირდა შეცდომა , გთხოვთ შეამოწმოთ თუ სერვერი არის ჩართული და გამოიყენეთ ბრძანება 'json-server --watch db.json' ტერმინალში",
+              })
+            );
           })
         )
       )
