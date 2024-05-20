@@ -40,6 +40,13 @@ export class CustomValidators {
       if (!control.value) {
         return null;
       }
+      const value = control.value as string;
+
+      // Check if the value is a string of numeric characters
+      if (!/^\d+$/.test(value)) {
+        return { notANumber: true };
+      }
+
       const exists = accountModel.some(
         (item) => item.accountNumber === control.value
       );

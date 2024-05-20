@@ -21,9 +21,14 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.router.events.subscribe((route) => {
       if (route instanceof NavigationEnd) {
-        this.showButton = route.url.includes("clients-list") ? true : false;
+        this.showButton = route.url.includes("clients-list");
         this.chd.markForCheck();
       }
     });
+  }
+
+  logOut() {
+    localStorage.removeItem("user");
+    this.router.navigate(["/log-in"]);
   }
 }

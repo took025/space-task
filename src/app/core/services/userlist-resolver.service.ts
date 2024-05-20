@@ -3,6 +3,7 @@ import {
   Resolve,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
+  Router,
 } from "@angular/router";
 import { Observable } from "rxjs";
 import { UserInterface } from "../../core/interface/interface";
@@ -12,7 +13,7 @@ import { mainService } from "./main-service";
   providedIn: "root",
 })
 export class ClientsResolver implements Resolve<UserInterface> {
-  constructor(private mainService: mainService) {}
+  constructor(private mainService: mainService, private router: Router) {}
 
   resolve(
     route: ActivatedRouteSnapshot,

@@ -26,7 +26,6 @@ export class ActionButtonsComponent {
 
   toggleDropdown(): void {
     this.dropDown = !this.dropDown;
-    console.log(this.userId);
   }
 
   deleteUser(): void {

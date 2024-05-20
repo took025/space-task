@@ -1,7 +1,6 @@
-import { ApplicationConfig } from "@angular/core";
+import { ApplicationConfig, isDevMode } from "@angular/core";
 import { provideRouter } from "@angular/router";
 import { provideAnimations } from "@angular/platform-browser/animations";
-
 import { routes } from "./app.routes";
 import {
   HTTP_INTERCEPTORS,
@@ -9,6 +8,12 @@ import {
   withInterceptorsFromDi,
 } from "@angular/common/http";
 import { DefaultHttpInterceptor } from "./core/interceptors/interceptor";
+import { metaReducers, reducers } from "./core/state";
+import { provideStore } from "@ngrx/store";
+import { provideStoreDevtools } from "@ngrx/store-devtools";
+import { UserEffects } from "./core/state/auth.effect";
+
+import { provideEffects } from "@ngrx/effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +25,9 @@ export const appConfig: ApplicationConfig = {
       useClass: DefaultHttpInterceptor,
       multi: true,
     },
+    provideStore(reducers, { metaReducers }),
+    // EffectsModule.forRoot([UserEffects]),
+    provideEffects([UserEffects]),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };

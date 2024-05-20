@@ -101,6 +101,7 @@ export class ClientsListComponent {
           } else {
             this.errorText[0].summary = `User list Data ${error.error}`;
           }
+          this.loader = false;
           this.chd.markForCheck();
         }
       );
@@ -118,8 +119,6 @@ export class ClientsListComponent {
     this.activRouter.queryParams
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((queryParams) => {
-        console.log(queryParams);
-
         if (queryParams?.page && queryParams?.limit) {
           this.pagination = {
             page: queryParams.page,

@@ -17,6 +17,10 @@
                     [ngClass]="{'show': clientForm.controls.accountNumber?.errors?.accountNumberExists && clientForm?.controls.accountNumber.touched}">
                     ამ ნომრით უკვე არსებობს ანგარიშის მოდელი , გთხოთ შეცვალოთ
                 </span>
+                <span class="form__error"
+                    [ngClass]="{'show': clientForm.controls.accountNumber?.errors?.notANumber && clientForm?.controls.accountNumber.touched}">
+                    გთხოვთ შეიყვანოთ მხოლოდ რიცხვები
+                </span>
             </div>
             <div class="form__group">
                 <label for="accountType">ანგარიშის ტიპი</label>
@@ -63,7 +67,7 @@
 <span>
     <div class="user-detail-container">
         <div *ngIf="model.id" [id]="model.id">
-            <div *ngIf="userData.accountModel.length">
+            <div *ngIf="userData.accountModel.length && model.accountType.name === 'აქტიური'">
                 <span class="close__icon" (click)="closeModel(model.id)" title="ანგარიშის დახურვა">
                     <i class="pi pi-times"></i>
                 </span>

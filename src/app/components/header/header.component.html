@@ -3,8 +3,14 @@
         <a [routerLink]="['/']">
             <img class="logo" src="https://cdn.dribbble.com/users/4990292/screenshots/10936644/space_4x.png" alt="">
         </a>
-        <button *ngIf="showButton" [routerLink]="['/client-form']" [queryParams]="{mode: 'create'}" pButton pRipple
-            label="შექმენით ანგარიში" class="p-button-success">
-        </button>
+        <div>
+            <button *ngIf="showButton" [routerLink]="['/client-form']" [queryParams]="{mode: 'create'}" pButton pRipple
+                label="შექმენით ანგარიში" class="p-button-success">
+            </button>
+
+            <button pButton pRipple label="გამოსვლა" (click)="logOut()" class="p-button-secondary"
+                style="margin-left: 15px;">
+            </button>
+        </div>
     </nav>
 </header>

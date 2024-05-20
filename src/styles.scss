@@ -24,6 +24,9 @@ body {
     .p-ripple.p-element.p-button.p-component {
         width: auto;
     }
+    .p-ripple.p-element.p-button.p-button-success {
+        width: 100%;
+    }
 }
 .model__buttton {
     display: flex;
@@ -62,6 +65,13 @@ body {
         .radio__container {
             margin-bottom: 13px;
         }
+    }
+    &.login__block {
+        padding-top: 50px;
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        margin: 0 auto;
     }
     .form__group {
         display: flex;

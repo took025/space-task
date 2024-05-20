@@ -91,6 +91,7 @@ export class AccountModelComponent {
             severity: "success",
             detail: "ანგარიშის მოდელი წარმატებით დაემატა",
           });
+          this.clientForm.reset();
           this.toggleForm();
         },
         (error) => {
@@ -103,11 +104,11 @@ export class AccountModelComponent {
   }
 
   closeModel(id: string | number) {
-    const newModel = this.userData.accountModel.filter(
-      (item: accountModel) => item.id !== id
-    );
-    this.userData.accountModel = newModel;
-    console.log(id, this.userData);
+    this.userData.accountModel.find((item) => {
+      if (item.id === id) {
+        item.accountType.name = "დახურული";
+      }
+    });
     this.mainservice
       .updateUser(this.userData.id, this.userData)
       .pipe(takeUntil(this.sub$))

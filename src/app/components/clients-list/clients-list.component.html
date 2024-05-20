@@ -1,6 +1,6 @@
-<app-client-filter (formValues)="handleFormValue($event)"></app-client-filter>
 <div class="table__block relative">
     <app-loader *ngIf="loader"></app-loader>
+    <app-client-filter (formValues)="handleFormValue($event)"></app-client-filter>
     @if (userList) {
     <p-table [value]="userList.data"
         [tableStyle]="{'min-width': '60rem' , 'max-width': '1550px' , 'margin' : '0 auto' , 'overflow' : 'hidden' }">

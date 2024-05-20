@@ -46,3 +46,9 @@ export interface ApiData {
   prev: any;
   data: UserInterface[];
 }
+export interface User {
+  id?: string;
+  email?: string;
+  password?: string;
+  personalId: string;
+}

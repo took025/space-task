@@ -1,0 +1,28 @@
+<form [formGroup]="loginForm" class="form-container login__block" (ngSubmit)="logIn()">
+    <div class="form__group">
+        <label for="personalId">პირადი ნომერი (1111111111)</label>
+        <input pInputText id="personalId" placeholder="ჩაწერეთ პრიადი ნოემრი" formControlName="personalId" />
+        <span class="form__error" [ngClass]="{'show': 
+        !loginForm?.controls.personalId.value && loginForm?.controls.personalId.touched}">
+            სავალდებულო ველი
+        </span>
+        <span class="form__error"
+            [ngClass]="{'show': (loginForm?.controls.personalId.errors?.minlength || loginForm?.controls.personalId.errors?.maxlength )  && loginForm?.controls.personalId.touched}">
+            პირადი ნომერი უნდა შედგებოდეს 11 ციფრისგან
+        </span>
+    </div>
+    <div class="form__group">
+        <label for="password">პაროლი (test123)</label>
+        <input pInputText id="password" type="password" placeholder="ჩაწერეთ პაროლი" formControlName="password" />
+        <span class="form__error"
+            [ngClass]="{'show':!loginForm?.controls.password.value  && loginForm?.controls.password.touched}">
+            სავალდებულო ველი
+        </span>
+        <span class="form__error" [ngClass]="{'show':errorMessage$ | async}">
+            {{errorMessage$ | async}}
+        </span>
+    </div>
+    <div>
+        <p-button [disabled]="loginForm.invalid" class="btn" severity="success" label="შესვლა" type="submit" />
+    </div>
+</form>

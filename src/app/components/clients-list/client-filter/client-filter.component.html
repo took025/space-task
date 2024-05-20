@@ -7,24 +7,25 @@
         </form>
     </div>
     @if (form.controls.selectedOption.value === 'detailed') {
-    <h2>Advanced Search</h2>
+    <h2>დეტალური ფილტრი</h2>
     <form [formGroup]="advancedSearchForm" (ngSubmit)="emitFormValues()">
         <div class="form-container search__block">
             <div class="form__group">
                 <label for="firstName">სახელ</label>
-                <input pInputText id="firstName" formControlName="name" />
+                <input pInputText id="firstName" placeholder="ჩაწერეთ სახელი" formControlName="name" />
             </div>
             <div class="form__group">
                 <label for="lastName">გვარი</label>
-                <input pInputText id="lastName" formControlName="surname" />
+                <input pInputText id="lastName" placeholder="ჩაწერეთ გვარი" formControlName="surname" />
             </div>
             <div class="form__group">
                 <label for="personalId">პირადი ნომერი</label>
-                <input pInputText id="personalId" formControlName="personalId" />
+                <input pInputText id="personalId" placeholder="ჩაწერეთ პრიადი ნოემრი" formControlName="personalId" />
             </div>
             <div class="form__group">
                 <label for="phoneNumber">ტელეფონის ნომერი</label>
-                <input pInputText id="phoneNumber" formControlName="phoneNumber" />
+                <input pInputText id="phoneNumber" placeholder="ჩაწერეთ ტელეფონის ნომერი"
+                    formControlName="phoneNumber" />
             </div>
 
             <div class="form__group">
@@ -53,13 +54,13 @@
         </div>
     </form>
     } @else {
-    <h2>Simple Search</h2>
+    <h2>მარტივი ფილტრი</h2>
     <form [formGroup]="simpleSearchForm" (ngSubmit)="emitFormValues()">
         <div class="form-container search__block">
 
             <div class="form__group">
                 <label for="query">ძებნა</label>
-                <input pInputText id="query" formControlName="query" />
+                <input pInputText id="query" formControlName="query" placeholder="ჩაწერეთ საძიებო სიტყვა" />
             </div>
             <div class="buttons">
                 <p-button class="btn" severity="secondary" (onClick)="simpleSearchForm.reset() ; emitFormValues()"

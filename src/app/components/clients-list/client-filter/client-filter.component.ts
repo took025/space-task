@@ -50,6 +50,7 @@ export class ClientFilterComponent {
 
   ngOnInit(): void {
     this.formsCreation();
+
     this.form.controls.selectedOption.valueChanges
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((val) => {
@@ -94,8 +95,8 @@ export class ClientFilterComponent {
         name: query,
         surname: query,
         gender: query,
-        personalId: query as string,
-        phoneNumber: query as string,
+        personalId: query,
+        phoneNumber: query,
       };
     }
     this.formValues.emit(payload);

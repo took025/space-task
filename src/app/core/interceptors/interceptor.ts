@@ -14,7 +14,7 @@ export class DefaultHttpInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const modifiedRequest = request.clone({
-      url: `http://localhost:3000/user-list${request.url}`,
+      url: `http://localhost:3000${request.url}`,
     });
     return next.handle(modifiedRequest);
   }
