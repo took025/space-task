@@ -32,19 +32,12 @@
         }
         .model__buttton {
             padding-bottom: 10px;
-            .p-element {
-                width: 230px;
+            .userform__btn {
+                width: 100%;
             }
             .btn {
                 display: flex;
             }
         }
-    }
-}
-.radio__container {
-    display: flex;
-    margin-top: 10px;
-    div {
-        margin-right: 20px;
     }
 }

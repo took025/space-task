@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { accountModel, userInterface } from "../../../core/interface/interface";
+import { accountModel, UserInterface } from "../../../core/interface/interface";
 import { ButtonModule } from "primeng/button";
 import { JsonPipe, NgClass, NgFor, NgIf } from "@angular/common";
 import { InputGroupAddonModule } from "primeng/inputgroupaddon";
@@ -46,7 +46,7 @@ import { CustomValidators } from "../../../core/validators/validate";
 })
 export class AccountModelComponent {
   public showForm: boolean = false;
-  @Input({ required: true }) userData: userInterface;
+  @Input({ required: true }) userData: UserInterface;
   sub$: Subject<void> = new Subject<void>();
 
   accountTypes = [

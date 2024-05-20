@@ -12,24 +12,27 @@ import {
   RouterOutlet,
 } from "@angular/router";
 import { ButtonModule } from "primeng/button";
-import { TableModule, TablePageEvent } from "primeng/table";
+import { TableModule } from "primeng/table";
 import { mainService } from "../../core/services/main-service";
-import { apiData, userInterface } from "../../core/interface/interface";
+import { ApiData } from "../../core/interface/interface";
 import { ActionButtonsComponent } from "../../shared/components/action-buttons/action-buttons.component";
 import { Paginator, PaginatorModule } from "primeng/paginator";
 import { Message, MessageService } from "primeng/api";
 import { ToastModule } from "primeng/toast";
 import { MessagesModule } from "primeng/messages";
-import { Subject, filter, takeUntil } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { EmptyPipe } from "../../core/pipes/empty.pipe";
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { ClientFilterComponent } from "./client-filter/client-filter.component";
 
 @Component({
   selector: "app-clients-list",
   standalone: true,
   imports: [
+    LoaderComponent,
     CommonModule,
     RouterOutlet,
-    ButtonModule,
+    ClientFilterComponent,
     TableModule,
     ActionButtonsComponent,
     PaginatorModule,
@@ -45,13 +48,15 @@ import { EmptyPipe } from "../../core/pipes/empty.pipe";
 export class ClientsListComponent {
   @ViewChild("paginator", { static: true }) paginator: Paginator;
   unsubscribe$: Subject<void> = new Subject();
-  userList: apiData;
+  userList: ApiData;
   public pagination = {
     page: 1,
     limit: 10,
   };
   first: number;
   errorText: Message[] | undefined = [{ severity: "error", summary: null }];
+  loader: boolean = false;
+  queryObjects = {};
 
   constructor(
     private mainService: mainService,
@@ -61,19 +66,29 @@ export class ClientsListComponent {
     private messageService: MessageService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  handleFormValue(e: Event) {
+    this.queryObjects = e;
     this.listenQueryParamsChanges();
   }
 
   getData(text?: string) {
+    this.loader = true;
     this.mainService
-      .getData(this.pagination.page, this.pagination.limit)
+      .getUserData(
+        this.pagination.page,
+        this.pagination.limit,
+        // this.advancedSearchForm.getRawValue()
+        this.queryObjects
+      )
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
-        (res: apiData) => {
+        (res: ApiData) => {
           this.userList = res;
           this.chd.markForCheck();
           setTimeout(() => {
+            this.loader = false;
             this.messageService.add({
               severity: "success",
               detail: text ? text : "ინფომრმაცია წარმატებით ჩაიტვირთა",
@@ -92,38 +107,47 @@ export class ClientsListComponent {
   }
 
   listenQueryParamsChanges(pagination?) {
+    let payload = {
+      ...this.pagination,
+      ...this.queryObjects,
+    };
     if (pagination) {
-      this.changeQueryParams();
+      this.changeQueryParams(payload);
       return;
     }
     this.activRouter.queryParams
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((queryParams) => {
+        console.log(queryParams);
+
         if (queryParams?.page && queryParams?.limit) {
           this.pagination = {
             page: queryParams.page,
             limit: queryParams.limit,
           };
         }
-        const event = {
-          page: queryParams.page,
-          rows: queryParams.limit,
-        };
+        // const event = {
+        //   page: queryParams.page,
+        //   rows: queryParams.limit,
+        // };
+
+        payload = { ...this.pagination, ...this.queryObjects };
         this.first = (queryParams?.page - 1) * queryParams?.limit;
       });
-    this.changeQueryParams();
+
+    this.changeQueryParams(payload);
   }
 
-  pageChange(e: any) {
+  pageChange(e) {
     this.pagination.page = e.page + 1;
     this.pagination.limit = e.rows;
     this.listenQueryParamsChanges(this.pagination);
   }
 
-  changeQueryParams() {
+  changeQueryParams(params) {
     this.router.navigate([], {
       relativeTo: this.activRouter,
-      queryParams: { ...this.pagination },
+      queryParams: { ...params },
       queryParamsHandling: "merge",
     });
     this.getData();

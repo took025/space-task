@@ -5,19 +5,19 @@ import {
   RouterStateSnapshot,
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { userInterface } from "../../core/interface/interface";
+import { UserInterface } from "../../core/interface/interface";
 import { mainService } from "./main-service";
 
 @Injectable({
   providedIn: "root",
 })
-export class ClientsResolver implements Resolve<userInterface> {
+export class ClientsResolver implements Resolve<UserInterface> {
   constructor(private mainService: mainService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<userInterface> {
+  ): Observable<UserInterface> {
     var id: number | string;
     if (route.url[0].path === "client-details") {
       id = route.paramMap.get("id");

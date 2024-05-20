@@ -1,0 +1,73 @@
+<div>
+    <div class="select__buttons">
+        <form [formGroup]="form">
+            <!-- <p-selectButton formControlName="selectedOption" [options]="options"></p-selectButton> -->
+            <p-selectButton [options]="stateOptions" formControlName="selectedOption" optionLabel="label"
+                optionValue="value" />
+        </form>
+    </div>
+    @if (form.controls.selectedOption.value === 'detailed') {
+    <h2>Advanced Search</h2>
+    <form [formGroup]="advancedSearchForm" (ngSubmit)="emitFormValues()">
+        <div class="form-container search__block">
+            <div class="form__group">
+                <label for="firstName">სახელ</label>
+                <input pInputText id="firstName" formControlName="name" />
+            </div>
+            <div class="form__group">
+                <label for="lastName">გვარი</label>
+                <input pInputText id="lastName" formControlName="surname" />
+            </div>
+            <div class="form__group">
+                <label for="personalId">პირადი ნომერი</label>
+                <input pInputText id="personalId" formControlName="personalId" />
+            </div>
+            <div class="form__group">
+                <label for="phoneNumber">ტელეფონის ნომერი</label>
+                <input pInputText id="phoneNumber" formControlName="phoneNumber" />
+            </div>
+
+            <div class="form__group">
+                <label>სქესი</label>
+                <div class="radio__container">
+                    <div class="flex align-items-center">
+                        <p-radioButton value="male" formControlName="gender" inputId="ingredient1" />
+                        <label for="ingredient1" class="ml-2">
+                            კაცი
+                        </label>
+                    </div>
+
+                    <div class="flex align-items-center">
+                        <p-radioButton value="female" formControlName="gender" inputId="ingredient2" />
+                        <label for="ingredient2" class="ml-2">
+                            ქალი
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <p-button class="btn" severity="secondary" (onClick)="advancedSearchForm.reset() ; emitFormValues()"
+                    label="გასუფთავება" />
+                <p-button class="btn" severity="success" label="ძებნა" type="submit" />
+            </div>
+        </div>
+    </form>
+    } @else {
+    <h2>Simple Search</h2>
+    <form [formGroup]="simpleSearchForm" (ngSubmit)="emitFormValues()">
+        <div class="form-container search__block">
+
+            <div class="form__group">
+                <label for="query">ძებნა</label>
+                <input pInputText id="query" formControlName="query" />
+            </div>
+            <div class="buttons">
+                <p-button class="btn" severity="secondary" (onClick)="simpleSearchForm.reset() ; emitFormValues()"
+                    label="გასუფთავება" />
+                <p-button class="btn" severity="success" label="ძებნა" type="submit" />
+            </div>
+        </div>
+    </form>
+    }
+
+</div>

@@ -1,60 +1,63 @@
-@if (userList) {
-<p-table [value]="userList.data"
-    [tableStyle]="{'min-width': '60rem' , 'max-width': '1550px' , 'margin' : '0 auto' , 'overflow' : 'hidden' }">
-    <ng-template pTemplate="header">
-        <tr>
-            <th pSortableColumn="id" style="width:20%">
-                კლიენტის ნომერი <p-sortIcon field="clientId" />
-            </th>
-            <th pSortableColumn="name" style="width:20%">
-                სახელი <p-sortIcon field="name" />
-            </th>
-            <th pSortableColumn="surname" style="width:20%">
-                გვარი <p-sortIcon field="surname" />
-            </th>
-            <th pSortableColumn="personalId" style="width:20%">
-                პირადი ნომერი <p-sortIcon field="personalId" />
-            </th>
-            <th pSortableColumn="phoneNumber" style="width:20%">
-                მობილური <p-sortIcon field="surname" />
-            </th>
-            <th pSortableColumn="gender" style="width:20%">
-                სქესი <p-sortIcon field="gender" />
-            </th>
-            <th style="width:20%">
-                ფოტო
-            </th>
-            <th style="width:20% ; padding-left: 30px;">
-                action
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-user>
-        <tr>
-            <td>{{ user.id | empty}}</td>
-            <td>{{ user.name | empty}}</td>
-            <td>{{ user.surname | empty}}</td>
-            <td>{{ user.personalId | empty}}</td>
-            <td>{{ user.phoneNumber | empty}}</td>
-            <td>{{ user.gender | empty}}</td>
-            <td>
-                <img class="user__image" [src]="user.image" [alt]="user.name" width="40" class="shadow-4" />
-            </td>
-            <td>
-                <app-action-buttons (onDeleteUser)="deleteUser($event)" [userId]="user.id"></app-action-buttons>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
-@if (userList.items > 10) {
+<app-client-filter (formValues)="handleFormValue($event)"></app-client-filter>
+<div class="table__block relative">
+    <app-loader *ngIf="loader"></app-loader>
+    @if (userList) {
+    <p-table [value]="userList.data"
+        [tableStyle]="{'min-width': '60rem' , 'max-width': '1550px' , 'margin' : '0 auto' , 'overflow' : 'hidden' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id" style="width:20%">
+                    კლიენტის ნომერი <p-sortIcon field="clientId" />
+                </th>
+                <th pSortableColumn="name" style="width:20%">
+                    სახელი <p-sortIcon field="name" />
+                </th>
+                <th pSortableColumn="surname" style="width:20%">
+                    გვარი <p-sortIcon field="surname" />
+                </th>
+                <th pSortableColumn="personalId" style="width:20%">
+                    პირადი ნომერი <p-sortIcon field="personalId" />
+                </th>
+                <th pSortableColumn="phoneNumber" style="width:20%">
+                    მობილური <p-sortIcon field="surname" />
+                </th>
+                <th pSortableColumn="gender" style="width:20%">
+                    სქესი <p-sortIcon field="gender" />
+                </th>
+                <th style="width:20%">
+                    ფოტო
+                </th>
+                <th style="width:20% ; padding-left: 30px;">
+                    action
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>{{ user.id | empty}}</td>
+                <td>{{ user.name | empty}}</td>
+                <td>{{ user.surname | empty}}</td>
+                <td>{{ user.personalId | empty}}</td>
+                <td>{{ user.phoneNumber | empty}}</td>
+                <td>{{ (user.gender === 'male' ? 'კაცი' : 'ქალი') | empty}}</td>
+                <td>
+                    <img class="user__image" [src]="user.image" [alt]="user.name" width="40" class="shadow-4" />
+                </td>
+                <td>
+                    <app-action-buttons (onDeleteUser)="deleteUser($event)" [userId]="user.id"></app-action-buttons>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    @if (userList.items > 10) {
 
-<p-paginator #paginator (onPageChange)="pageChange($event)" [first]="first" [rows]="pagination.limit"
-    [totalRecords]="userList?.items" [rowsPerPageOptions]="[10, 20, 30]" />
-}
-} @else {
-<span class="form__error show">
-    <!-- {{errorText[0].summary}} -->
-    <p-messages *ngIf="errorText[0].summary" [(value)]="errorText" [enableService]="false" closable="false" />
-</span>
-}
+    <p-paginator #paginator (onPageChange)="pageChange($event)" [first]="first" [rows]="pagination.limit"
+        [totalRecords]="userList?.items" [rowsPerPageOptions]="[10, 20, 30]" />
+    }
+    } @else {
+    <span class="form__error show">
+        <p-messages *ngIf="errorText[0].summary" [(value)]="errorText" [enableService]="false" closable="false" />
+    </span>
+    }
+</div>
 <p-toast />

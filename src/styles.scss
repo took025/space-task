@@ -21,6 +21,9 @@ body {
     .p-datatable .p-datatable-thead > tr > th {
         white-space: nowrap;
     }
+    .p-ripple.p-element.p-button.p-component {
+        width: auto;
+    }
 }
 .model__buttton {
     display: flex;
@@ -53,6 +56,13 @@ body {
     &.model {
         grid-template-columns: repeat(4, calc(25% - 12px));
     }
+    &.search__block {
+        grid-template-columns: repeat(6, calc(17% - 18px));
+        align-items: end;
+        .radio__container {
+            margin-bottom: 13px;
+        }
+    }
     .form__group {
         display: flex;
         flex-direction: column;
@@ -60,4 +70,15 @@ body {
             margin-bottom: 5px;
         }
     }
+}
+
+.radio__container {
+    display: flex;
+    margin-top: 10px;
+    .flex {
+        margin-right: 20px;
+    }
+}
+.relative {
+    position: relative;
 }

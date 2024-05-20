@@ -1,4 +1,4 @@
-export interface userInterface {
+export interface UserInterface {
   id: string;
   name: string;
   surname: string;
@@ -37,12 +37,12 @@ export interface accountModel {
   accountNumber: string;
 }
 
-export interface apiData {
+export interface ApiData {
   first: number;
   items: number;
   last: number;
   next: number;
   pages: number;
   prev: any;
-  data: userInterface[];
+  data: UserInterface[];
 }

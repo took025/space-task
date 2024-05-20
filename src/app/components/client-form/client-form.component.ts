@@ -15,7 +15,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
-import { userInterface } from "../../core/interface/interface";
+import { UserInterface } from "../../core/interface/interface";
 import { mainService } from "../../core/services/main-service";
 import { MessageService } from "primeng/api";
 import { ToastModule } from "primeng/toast";
@@ -44,7 +44,7 @@ import { CustomValidators } from "../../core/validators/validate";
 export class ClientFormComponent {
   userForm: FormGroup;
   sub$: Subject<void> = new Subject<void>();
-  public clientData: userInterface;
+  public clientData: UserInterface;
   public Editmode =
     this.route.snapshot.queryParamMap.get("mode") === "edit" ? true : false;
   public imageUrl: string | ArrayBuffer | null = null;

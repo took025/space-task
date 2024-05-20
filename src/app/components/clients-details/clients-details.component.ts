@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { mainService } from "../../core/services/main-service";
-import { userInterface } from "../../core/interface/interface";
+import { UserInterface } from "../../core/interface/interface";
 import { JsonPipe } from "@angular/common";
 import { FieldsetModule } from "primeng/fieldset";
 import { ActivatedRoute } from "@angular/router";
@@ -29,7 +29,7 @@ import { ToastModule } from "primeng/toast";
 })
 export class ClientsDetailsComponent {
   sub$: Subject<void> = new Subject<void>();
-  public clientData: userInterface;
+  public clientData: UserInterface;
 
   constructor(
     private mainService: mainService,
@@ -62,7 +62,7 @@ export class ClientsDetailsComponent {
       .getUserDetail(id)
       .pipe(takeUntil(this.sub$))
       .subscribe(
-        (res: userInterface) => {
+        (res: UserInterface) => {
           this.clientData = res;
         },
         (error) => {

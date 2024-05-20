@@ -83,14 +83,14 @@
                 <label>სქესი</label>
                 <div class="radio__container">
                     <div class="flex align-items-center">
-                        <p-radioButton value="კაცი" formControlName="gender" inputId="ingredient1" />
+                        <p-radioButton value="male" formControlName="gender" inputId="ingredient1" />
                         <label for="ingredient1" class="ml-2">
                             კაცი
                         </label>
                     </div>
 
                     <div class="flex align-items-center">
-                        <p-radioButton value="ქალი" formControlName="gender" inputId="ingredient2" />
+                        <p-radioButton value="female" formControlName="gender" inputId="ingredient2" />
                         <label for="ingredient2" class="ml-2">
                             ქალი
                         </label>
@@ -176,8 +176,8 @@
             <input id="uploadImage" type="file" (change)="onFileSelected($event)">
         </div>
         <div class="model__buttton">
-            <p-button class="btn" [disabled]="userForm.invalid || !imageUrl" label=" {{Editmode ? 'edit' : 'add' }}"
-                type="submit" />
+            <p-button class="btn userform__btn" [disabled]="userForm.invalid || !imageUrl"
+                label=" {{Editmode ? 'შეცვლა' : 'დამატება' }}" type="submit" />
         </div>
     </div>
 
